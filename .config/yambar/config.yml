@@ -1,0 +1,197 @@
+small_symbol_font: &small_symbol_font "Font Awesome 6 Free:size=8:style=Solid"
+big_symbol_font: &big_symbol_font "Font Awesome 6 Free:size=12:style=Solid"
+special_symbol_font: &special_symbol_font "JetBrainsMono Nerd Font:size=13"
+default_font: &default_font Inter:size=12:style=Regular
+
+col_fg: &col_fg f8f8f2ff
+col_bg: &col_bg 282a36ff
+col_comment: &col_comment 6272a4ff
+col_purple: &col_purple bd93f9ff
+col_red: &col_red ff5555ff
+col_orange: &col_orange ffb86cff
+col_green: &col_green 50fa7bff
+col_yellow: &col_yellow f1fa8cff
+
+bar:
+   height: 21
+   location: top
+   spacing: 10
+   margin: 7
+   font: *default_font
+   background: *col_bg
+   foreground: *col_fg
+
+   left:
+      - river:
+         title:
+            map:
+               default:
+                  string:
+                     text: "{title}" 
+                     max: 70
+                     foreground: *col_fg
+               conditions:
+                  title == "":
+                     string:
+                        text: Empty View
+                        max: 70
+                        foreground: *col_comment
+         content: { empty: {} }
+
+   center:
+      - river:
+         anchors:
+            - river_tag: &river_tag
+               text: 
+               font: *small_symbol_font
+               margin: 5
+               foreground: *col_comment # For unfocused and not occupied tags
+         content:
+            map:
+               on-click:
+                  left: sh -c "riverctl set-focused-tags $((1 << ({id} - 1)))"
+                  right: sh -c "riverctl toggle-focused-tags $((1 << ({id} - 1)))"
+                  middle: sh -c "riverctl toggle-view-tags $((1 << ({id} -1)))"
+               conditions:
+                  state == focused:
+                     string:
+                        <<: *river_tag
+                        foreground: *col_green
+                  state == unfocused:
+                     string:
+                        <<: *river_tag
+                        foreground: *col_comment
+                  state == invisible:
+                     map:
+                        conditions:
+                           occupied:
+                              string:
+                                 <<: *river_tag
+                                 foreground: *col_fg
+                           ~occupied:
+                              map:
+                                 default: { empty: {} }
+                                 conditions:
+                                    id == 1: { string: { <<: *river_tag }}
+                                    id == 2: { string: { <<: *river_tag }}
+                                    id == 3: { string: { <<: *river_tag }}
+                                    id == 4: { string: { <<: *river_tag }}
+                                    id == 5: { string: { <<: *river_tag }}
+                                    id == 6: { string: { <<: *river_tag }}
+                                    id == 7: { string: { <<: *river_tag }}
+                                    id == 8: { string: { <<: *river_tag }}
+                                    id == 9: { string: { <<: *river_tag }}
+   right:
+      - backlight:
+         name: intel_backlight
+         content:
+            - ramp:
+               tag: percent
+               right-margin: 10
+               items:
+                  - string: 
+                     text: 
+                     font: *special_symbol_font
+                     foreground: *col_comment
+                  - string: 
+                     text: 
+                     font: *special_symbol_font
+                     foreground: *col_orange
+                  - string: 
+                     text: 
+                     font: *special_symbol_font
+                     foreground: *col_yellow
+                  - string: 
+                     text: 
+                     font: *special_symbol_font
+                     foreground: *col_red
+            - string:
+               text: "{percent}%"
+      - alsa:
+         card: pipewire
+         mixer: Master
+         content:
+            map:
+               conditions:
+                  ~online:
+                     - string:
+                        text: 
+                        font: *big_symbol_font
+                        foreground: *col_comment
+                        right-margin: 5
+                     - string:
+                        text: No Audio
+                        foreground: *col_comment
+                        right-margin: 5
+                  online:
+                     map:
+                        default:
+                           - ramp:
+                              tag: percent
+                              right-margin: 5
+                              items:
+                                 - string:
+                                    text: 
+                                    font: *big_symbol_font
+                                    foreground: *col_red
+                                 - string: 
+                                    text: 
+                                    font: *big_symbol_font
+                                    foreground: *col_orange
+                                 - string: 
+                                    text: 
+                                    font: *big_symbol_font
+                                    foreground: *col_green
+                           - string:
+                              text: "{percent}%"
+                        conditions:
+                           muted:
+                              - string:
+                                 text: 
+                                 font: *big_symbol_font
+                                 foreground: *col_comment
+                                 right-margin: 5
+                              - string:
+                                 text: Muted
+                                 foreground: *col_comment
+                                 right-margin: 5
+      - network:
+         name: wlp3s0
+         content:
+            map:
+               default:
+                  - string:
+                     text: 
+                     font: *big_symbol_font
+                     foreground: *col_purple
+                     right-margin: 5
+                  - string:
+                     text: "{ssid}"
+               conditions:
+                  state == down:
+                     - string:
+                        text: 
+                        font: *big_symbol_font
+                        foreground: *col_comment
+                        right-margin: 5
+                     - string:
+                        text: "No Connection"
+                        foreground: *col_comment
+      - clock:
+         date-format: "%b %d, %Y"
+         content:
+            - string:
+               text:  
+               font: *big_symbol_font
+               right-margin: 5
+            - string:
+               text: "{date}"
+      - clock:
+         time-format: "%I:%M %p"
+         content:
+            - string:
+               text:  
+               font: *big_symbol_font
+               right-margin: 5
+            - string:
+               text: "{time}"

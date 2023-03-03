@@ -1,0 +1,14 @@
+local M = {}
+
+M.config = function()
+   require('snippy').setup {
+      mappings = {
+         is = {
+            ['<C-l>'] = 'expand_or_advance',
+            ['<C-h>'] = 'previous',
+         },
+      },
+   }
+end
+
+return M
