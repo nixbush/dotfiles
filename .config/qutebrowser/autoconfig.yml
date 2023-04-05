@@ -27,12 +27,16 @@ settings:
     global: both
   content.cookies.accept:
     global: all
+  content.geolocation:
+    https://www.google.com: false
   content.headers.user_agent:
-    global: Mozilla/5.0 (X11; Linux i686; rv:110.0) Gecko/20100101 Firefox/110.0
+    global: Mozilla/5.0 ({os_info}) AppleWebKit/{webkit_version} (KHTML, like Gecko)
+      {qt_key}/{qt_version} {upstream_browser_key}/{upstream_browser_version} Safari/{webkit_version}
   content.javascript.can_access_clipboard:
     global: true
   content.notifications.enabled:
     https://crohasit.net: false
+    https://sea.mashable.com: false
     https://smallseotools.com: false
     https://www.facebook.com: false
     https://www.fotor.com: false
