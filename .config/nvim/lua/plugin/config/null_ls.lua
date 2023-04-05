@@ -21,7 +21,7 @@ M.config = function()
                group = augroup,
                buffer = bufnr,
                callback = function()
-                  utils.async_format(bufnr)
+                  vim.lsp.buf.format { bufnr = bufnr, timeout_ms = 5000 }
                end,
             })
          end
@@ -30,6 +30,9 @@ M.config = function()
          formatting.stylua,
          formatting.clang_format,
          formatting.rustfmt,
+         formatting.mdformat.with {
+            extra_args = { '--wrap', vim.wo.colorcolumn, '--number' },
+         },
       },
    }
 end

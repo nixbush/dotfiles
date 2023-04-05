@@ -45,6 +45,9 @@ map('n', '<leader>e', function() -- Window close
 end)
 map('n', '<leader>Q', vim.cmd.qall)
 map('n', '<leader>w', vim.cmd.write)
+map('n', '<leader>W', function()
+   vim.cmd.write { bang = true }
+end)
 map('n', '<leader>s', vim.cmd.source)
 
 -- Move between buffers and tabs
@@ -101,7 +104,7 @@ map('n', '<C-d>', '<C-d>zz')
 map('n', 'J', 'mzJ`z')
 
 -- Clear search highlight
-map('n', '<leader>h', vim.cmd.nohlsearch)
+map('n', '<leader>c', vim.cmd.nohlsearch)
 
 -- Terminal escape
 map('t', '<A-ESC>', '<C-\\><C-n><Esc>')

@@ -32,6 +32,7 @@ local plugins = {
    },
    {
       'dcampos/nvim-snippy',
+      ft = 'snippets',
       event = 'InsertEnter',
       config = function()
          require('plugin.config.nvim_snippy').config()
@@ -46,18 +47,23 @@ local plugins = {
    },
    {
       'jedrzejboczar/toggletasks.nvim',
-      event = 'VeryLazy',
-      init = function()
-         require('plugin.config.toggletasks').init()
-      end,
+      keys = { '<leader>te', '<leader>ts', '<leader>tt' },
       config = function()
+         require('plugin.config.toggletasks').init()
          require('plugin.config.toggletasks').config()
       end,
    },
    {
       'mfussenegger/nvim-dap',
-      init = function() end,
-      config = function() end,
+      dependencies = {
+         'rcarriga/nvim-dap-ui',
+      },
+      init = function()
+         require('plugin.config.dap').init()
+      end,
+      config = function()
+         require('plugin.config.dap').config()
+      end,
    },
 
    --------------------------------
@@ -119,10 +125,15 @@ local plugins = {
    },
    {
       'ThePrimeagen/harpoon',
-      init = function()
-         require('plugin.config.harpoon').init()
-      end,
+      keys = {
+         '<leader>hh',
+         '<leader>ht',
+         '<leader>hu',
+         ']h',
+         '[h',
+      },
       config = function()
+         require('plugin.config.harpoon').init()
          require('plugin.config.harpoon').config()
       end,
    },
@@ -155,19 +166,14 @@ local plugins = {
    },
    {
       'nvim-lualine/lualine.nvim',
-      event = 'VeryLazy',
       config = function()
-         require('plugin.config.lualine').config()
+         require('lualine').setup {}
       end,
    },
    {
       'kdheepak/tabline.nvim',
-      event = 'VeryLazy',
-      init = function()
-         require('plugin.config.tabline').init()
-      end,
       config = function()
-         require('plugin.config.tabline').config()
+         require('tabline').setup()
       end,
    },
 }

@@ -11,43 +11,59 @@ M.config = function()
       vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
    end
 
-   -- Change diagnostic float config
+   -- Change diagnostic config
    vim.diagnostic.config {
-      float = {
-         source = 'line',
-         border = 'single',
+      virtual_text = {
+         source = 'always',
+         prefix = '●',
       },
+      float = {
+         focusable = false,
+         close_events = {
+            'BufLeave',
+            'CursorMoved',
+            'InsertEnter',
+            'FocusLost',
+         },
+         border = 'single',
+         source = 'always',
+         prefix = ' ',
+         scope = 'line', -- cursor
+      },
+      signs = true,
+      underline = true,
+      update_in_insert = false,
+      severity_sort = true,
    }
 
    ---------------------------------
    -- LSP Attachments
    ---------------------------------
-   local common_capabilities = {
-      require('cmp_nvim_lsp').default_capabilities(),
-      textDocument = {
-         foldingRange = {
-            dynamicRegistration = false,
-            lineFoldingOnly = true,
-         },
-      },
+   local common_capabilities = require('cmp_nvim_lsp').default_capabilities()
+   common_capabilities.textDocument.foldingRange = {
+      dynamicRegistration = false,
+      lineFoldingOnly = true,
    }
+
    local common_handlers = {
-      textDocument = {
-         publishDiagnostics = vim.lsp.with(
-            vim.lsp.diagnostic.on_publish_diagnostics,
-            { severity_sort = true }
-         ),
-         hover = vim.lsp.with(vim.lsp.handlers.hover, { border = 'single' }),
-         signatureHelp = vim.lsp.with(
-            vim.lsp.handlers.signature_help,
-            { border = 'single' }
-         ),
-      },
+      ['textDocument/hover'] = vim.lsp.with(
+         vim.lsp.handlers.hover,
+         { border = 'single' }
+      ),
+      ['textDocument/publishDiagnostics'] = vim.lsp.with(
+         vim.lsp.diagnostic.on_publish_diagnostics,
+         { severity_sort = true }
+      ),
+      ['textDocument/signatureHelp'] = vim.lsp.with(
+         vim.lsp.handlers.signature_help,
+         { border = 'single' }
+      ),
    }
-   local common_on_attach = function(client, bufnr)
+
+   local common_on_attach = function(_, bufnr)
       -- Let a formatter plugin handle it
-      client.server_capabilities.documentFormattingProvider = false
-      client.server_capabilities.documentRangeFormattingProvider = false
+      -- client.server_capabilities.documentFormattingProvider = false
+      -- client.server_capabilities.documentRangeFormattingProvider = false
 
       -- Set mappings
       local map = function(mode, key, cmd)
@@ -62,15 +78,13 @@ M.config = function()
       map('n', '<leader>lr', vim.lsp.buf.rename)
       map('n', '<leader>la', vim.lsp.buf.code_action)
       map('n', '<leader>lq', vim.lsp.buf.references)
-      map('n', '<leader>lf', require('utils').async_format)
-      map({ 'n', 'v', 'x' }, '<leader>lF', function()
-         vim.lsp.buf.format { async = true, bufnr = bufnr, range = {} }
-      end)
+      map('n', '<leader>lf', vim.lsp.buf.format)
+      map({ 'n', 'v', 'x' }, '<leader>lF', require('utils').range_format)
       map('n', '<leader>le', vim.diagnostic.open_float)
       map('n', '<leader>ll', vim.diagnostic.setloclist)
       map('n', '<leader>lL', vim.diagnostic.setqflist)
-      map('n', '[d', vim.diagnostic.goto_prev)
-      map('n', ']d', vim.diagnostic.goto_next)
+      map('n', '[e', vim.diagnostic.goto_prev)
+      map('n', ']e', vim.diagnostic.goto_next)
    end
 
    ---------------------------------

@@ -14,6 +14,7 @@ M.config = function()
          'NvimTree',
          'alpha',
          'lazy',
+         'man',
       },
       space_char_blankline = ' ',
       buftype_exclude = { 'terminal' },

@@ -47,6 +47,7 @@ M.config = function()
                nvim_lsp = 'LSP',
                buffer = 'Buffer',
                path = 'Path',
+               nvim_lsp_signature_help = 'Argument',
                snippy = 'Snippy',
             })[entry.source.name]
 
