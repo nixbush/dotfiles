@@ -46,14 +46,6 @@ local plugins = {
       end,
    },
    {
-      'jedrzejboczar/toggletasks.nvim',
-      keys = { '<leader>te', '<leader>ts', '<leader>tt' },
-      config = function()
-         require('plugin.config.toggletasks').init()
-         require('plugin.config.toggletasks').config()
-      end,
-   },
-   {
       'mfussenegger/nvim-dap',
       dependencies = {
          'rcarriga/nvim-dap-ui',

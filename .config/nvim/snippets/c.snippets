@@ -57,12 +57,12 @@ snippet sst
 	#include <stdlib.h>
 	#include <stdio.h>
 
-	int main(int argc, char *argv[]) {
+	int main(int argc, const char *argv[]) {
 		${1:puts("Hello, World!");}
 		return 0;
 	}
 snippet main
-	int main(${1:int argc, char *argv[]}) {
+	int main(${1:int argc, const char *argv[]}) {
 		${2:puts("Hello, World!");}
 		return 0;
 	}

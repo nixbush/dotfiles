@@ -7,7 +7,10 @@ M.config = function()
    local nls = require 'null-ls'
    local formatting = nls.builtins.formatting
    local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
-   local utils = require 'utils'
+
+   vim.keymap.set('n', '<leader>lf', function()
+      vim.lsp.buf.format { bufnr = 0, timeout_ms = 5000 }
+   end)
 
    --------------------------------
    -- Configure null-ls

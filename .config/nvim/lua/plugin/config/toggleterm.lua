@@ -2,9 +2,9 @@ local M = {}
 
 M.init = function()
    local map = vim.keymap.set
-   map('n', '<A-|>', '<C-\\><C-n><cmd>ToggleTerm direction=vertical<cr>')
-   map('t', '<A-|>', '<C-\\><C-n><cmd>ToggleTerm direction=vertical<cr>')
-   map('n', '<A-\\>', '<C-\\><C-n><cmd>ToggleTerm direction=horizontal<cr>')
+   map('n', '<C-\\>', '<cmd>ToggleTerm direction=vertical<cr>')
+   map('t', '<C-\\>', '<C-\\><C-n><cmd>ToggleTerm direction=vertical<cr>')
+   map('n', '<A-\\>', '<cmd>ToggleTerm direction=horizontal<cr>')
    map('t', '<A-\\>', '<C-\\><C-n><cmd>ToggleTerm direction=horizontal<cr>')
 end
 
@@ -18,7 +18,7 @@ M.config = function()
             return vim.o.columns * 0.3
          end
       end,
-      open_mapping = nil,
+         open_mapping = nil,
       on_open = function()
          local winset = vim.api.nvim_win_set_option
          winset(0, 'signcolumn', 'no')

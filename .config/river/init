@@ -142,9 +142,9 @@ riverctl map passthrough Super F11 enter-mode normal
 # Set media key mappings at different modes
 for mode in normal locked; do
    # Control pulse audio volume with amixer
-   riverctl map -repeat $mode None XF86AudioRaiseVolume  spawn 'amixer -qD pipewire sset Master 5%+'
-   riverctl map -repeat $mode None XF86AudioLowerVolume  spawn 'amixer -qD pipewire sset Master 5%-'
-   riverctl map $mode None XF86AudioMute                 spawn 'amixer -qD pipewire sset Master toggle'
+   riverctl map -repeat $mode None XF86AudioRaiseVolume  spawn 'amixer -q sset Master 5%+'
+   riverctl map -repeat $mode None XF86AudioLowerVolume  spawn 'amixer -q sset Master 5%-'
+   riverctl map $mode None XF86AudioMute                 spawn 'amixer -q sset Master toggle'
 
    # Control MPRIS aware media players with playerctl
    riverctl map $mode None XF86AudioMedia spawn 'playerctl play-pause'
@@ -163,6 +163,7 @@ done
 yambar &                                         # Statusbar at the top
 dunst &                                          # Notification daemon
 blueman-applet &                                 # Bluetooth Manager
+# foot -s &                                        # Foot terminal daemon
 swaybg -i "$HOME/Pictures/Wallpapers/arch.png" & # Set wallpaper
 
 # Enable wayland screen sharing

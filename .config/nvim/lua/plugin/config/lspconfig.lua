@@ -61,10 +61,6 @@ M.config = function()
    }
 
    local common_on_attach = function(_, bufnr)
-      -- Let a formatter plugin handle it
-      -- client.server_capabilities.documentFormattingProvider = false
-      -- client.server_capabilities.documentRangeFormattingProvider = false
-
       -- Set mappings
       local map = function(mode, key, cmd)
          vim.keymap.set(mode, key, cmd, { buffer = bufnr })
@@ -78,7 +74,9 @@ M.config = function()
       map('n', '<leader>lr', vim.lsp.buf.rename)
       map('n', '<leader>la', vim.lsp.buf.code_action)
       map('n', '<leader>lq', vim.lsp.buf.references)
-      map('n', '<leader>lf', vim.lsp.buf.format)
+      map('n', '<leader>lf', function()
+         vim.lsp.buf.format { bufnr = 0, timeout_ms = 5000 }
+      end)
       map({ 'n', 'v', 'x' }, '<leader>lF', require('utils').range_format)
       map('n', '<leader>le', vim.diagnostic.open_float)
       map('n', '<leader>ll', vim.diagnostic.setloclist)

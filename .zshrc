@@ -180,3 +180,4 @@ alias gitc='git add -A && git commit -m'
 alias gitcm='git add -A && git commit'
 
 alias dotfiles="git --git-dir=$HOME/.repos/dotfiles --work-tree=$HOME"
+alias hibernate="systemctl hibernate"
