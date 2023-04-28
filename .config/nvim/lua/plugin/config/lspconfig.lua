@@ -130,6 +130,8 @@ M.config = function()
          '--compile-commands-dir=build/',
          '--header-insertion-decorators=0',
          '--header-insertion=never',
+         '--offset-encoding=utf-16',
+         '--malloc-trim',
       },
    }
 
