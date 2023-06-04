@@ -10,10 +10,24 @@ settings:
     global: true
   backend:
     global: webengine
+  colors.tabs.pinned.even.bg:
+    global: darkseagreen
+  colors.webpage.bg:
+    global: '#24273a'
+  colors.webpage.darkmode.algorithm:
+    global: lightness-cielab
+  colors.webpage.darkmode.enabled:
+    global: false
+  colors.webpage.darkmode.grayscale.all:
+    global: false
+  colors.webpage.darkmode.policy.images:
+    global: smart
   colors.webpage.preferred_color_scheme:
     global: dark
   completion.height:
     global: 24%
+  completion.scrollbar.width:
+    global: 12
   completion.shrink:
     global: false
   confirm_quit:
@@ -21,8 +35,18 @@ settings:
     - downloads
   content.autoplay:
     global: false
+  content.blocking.adblock.lists:
+    global:
+    - https://easylist.to/easylist/easylist.txt
+    - https://easylist.to/easylist/easyprivacy.txt
+    - https://easylist-downloads.adblockplus.org/abp-filters-anti-cv.txt
+    - https://raw.githubusercontent.com/Spam404/lists/master/adblock-list.txt
+    - https://easylist-downloads.adblockplus.org/fanboy-notifications.txt
+    - https://raw.githubusercontent.com/hoshsadiq/adblock-nocoin-list/master/nocoin.txt
+    - https://raw.githubusercontent.com/bongochong/CombinedPrivacyBlockLists/master/cpbl-abp-list.txt
+    - https://easylist-downloads.adblockplus.org/fanboy-social.txt
   content.blocking.enabled:
-    global: false
+    global: true
   content.blocking.method:
     global: both
   content.cookies.accept:
@@ -36,10 +60,12 @@ settings:
     global: true
   content.notifications.enabled:
     https://crohasit.net: false
+    https://gamdie.com: false
     https://sea.mashable.com: false
     https://smallseotools.com: false
     https://www.facebook.com: false
     https://www.fotor.com: false
+    https://www.messenger.com: false
     https://www.reddit.com: false
     https://www.youtube.com: false
   content.notifications.presenter:
@@ -55,7 +81,7 @@ settings:
   fonts.default_size:
     global: 10pt
   fonts.web.family.fixed:
-    global: JetBrainsMono Nerd Font
+    global: UbuntuMono Nerd Font
   fonts.web.family.serif:
     global: null
   fonts.web.family.standard:
@@ -66,12 +92,24 @@ settings:
     global: software-opengl
   scrolling.bar:
     global: always
+  session.lazy_restore:
+    global: true
   statusbar.show:
     global: always
   tabs.last_close:
     global: startpage
+  tabs.padding:
+    global:
+      bottom: 0
+      left: 5
+      right: 5
+      top: 0
+  tabs.position:
+    global: top
+  tabs.title.alignment:
+    global: left
   tabs.title.format:
-    global: '{audio}{index}: {current_title}'
+    global: '{audio}{private}{current_title}'
   url.default_page:
     global: https://search.brave.com
   url.searchengines:
@@ -79,3 +117,5 @@ settings:
       DEFAULT: https://search.brave.com/search?q={}
   url.start_pages:
     global: https://search.brave.com
+  window.hide_decoration:
+    global: false

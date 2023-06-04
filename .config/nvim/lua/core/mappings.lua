@@ -10,7 +10,7 @@ vim.g.maplocalleader = ';'
 local map = vim.keymap.set
 
 -- Save, quit and load
-map('n', '<leader>q', function() -- Close buffers
+map('n', 'Q', function() -- Close buffers
    local buflisted = vim.fn.getbufinfo { buflisted = 1 }
    local cur_winnr, cur_bufnr = vim.fn.winnr(), vim.fn.bufnr()
 
@@ -36,19 +36,16 @@ map('n', '<leader>q', function() -- Close buffers
    local is_terminal = vim.fn.getbufvar(cur_bufnr, '&buftype') == 'terminal'
    vim.cmd(is_terminal and 'bd! #' or 'silent! confirm bd #')
 end)
-map('n', '<leader>e', function() -- Window close
+map('n', '<leader>q', '<cmd>confirm qall<cr>')
+map('n', 'E', function() -- Window close
    if #vim.api.nvim_list_wins() > 1 then
       vim.cmd 'q'
    else
       print 'Cannot close last window'
    end
 end)
-map('n', '<leader>Q', vim.cmd.qall)
-map('n', '<leader>w', vim.cmd.write)
-map('n', '<leader>W', function()
-   vim.cmd.write { bang = true }
-end)
-map('n', '<leader>s', vim.cmd.source)
+map('n', 'W', vim.cmd.write)
+map('n', 'S', vim.cmd.source)
 
 -- Move between buffers and tabs
 map('n', 'L', vim.cmd.bnext)

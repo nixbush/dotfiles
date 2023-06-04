@@ -1,0 +1,55 @@
+{
+   //------------------------------
+   // Configuration
+   //------------------------------
+   "margin": "6 6 0 6",
+   
+   //------------------------------
+   // Modules
+   //------------------------------
+   "modules-left": ["wlr/workspaces", "hyprland/window"],
+   "modules-center": [],
+   "modules-right": ["network", "backlight", "wireplumber", "clock", "tray"],
+
+   "wlr/workspaces": {
+      "format": "{name}",
+      "on-scroll-up": "hyprctl dispatch workspace e+1",
+      "on-scroll-down": "hyprctl dispatch workspace e-1",
+      "on-click": "activate"
+   },
+   "hyprland/window": {
+      "format": "{}",
+      "max-length": 100,
+      "separate-outputs": true,
+   },
+
+   "network": {
+      "interface": "wlp3s0", 
+      "format": "{ifname}",
+      "format-wifi": "<span color=\"#a6da95\"> </span> {essid}",
+      "format-ethernet": "<span color=\"#a6da95\">󰈀 </span> Ethernet",
+      "format-disconnected": "<span color=\"#ed8796\">󰖪 </span>  Disconnected",
+      "tooltip-format": "{essid}",
+   },
+	"backlight": {
+		"format": "<span color=\"#eed49f\">{icon}</span> {percent:>3}%",
+      "format-icons": ["󰃞 ", "󰃟 ", "󰃠 "],
+      "on-scroll-up": "light -A 5",
+		"on-scroll-down": "light -U 5"
+	},
+   "wireplumber": {
+      "on-click": "pavucontrol",
+		"format": "<span color=\"#8aadf4\">{icon}</span> {volume:>3}%",
+      "format-muted": "<span color=\"#ed8796\">󰝟 </span> Muted",
+      "format-icons": ["󰕿", "󰖀", "󰕾"],
+   },
+   "clock": {
+      "format": "{:%I:%M %p / %d %b %Y}",
+      "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+      "format-alt": "{:%b %d, %Y}"
+   },
+   "tray": {
+      "icon-size": 16,
+      "spacing": 0
+   },
+}

@@ -1,11 +1,3 @@
-import dracula.draw
-
-# Load existing settings made via :set
+import catppuccin
 config.load_autoconfig()
-
-dracula.draw.blood(c, {
-   'spacing': {
-       'vertical': 6,
-       'horizontal': 8
-   }
-})
+catppuccin.setup(c, 'macchiato', True)

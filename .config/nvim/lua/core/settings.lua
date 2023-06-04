@@ -12,8 +12,6 @@ syntax enable
 ---------------------------------
 -- Global variables
 ---------------------------------
-g.loaded_netrw = true
-g.loaded_netrwPlugin = true
 g.vimsyn_embed = 'laf'
 
 ---------------------------------
