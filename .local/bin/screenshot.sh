@@ -16,7 +16,7 @@ usage() {
 # ------------------------------
 DIRECTORY="$HOME/Pictures/Screenshots"
 
-DATE=$(date +%Y-%m-%d)
+DATE=$(date +%d-%m-%Y)
 TIME=$(date +%H-%M-%S)
 
 FILENAME="$DIRECTORY/screenshot_$DATE-$TIME.png"

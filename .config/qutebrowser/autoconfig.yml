@@ -56,11 +56,12 @@ settings:
   content.headers.user_agent:
     global: Mozilla/5.0 ({os_info}) AppleWebKit/{webkit_version} (KHTML, like Gecko)
       {qt_key}/{qt_version} {upstream_browser_key}/{upstream_browser_version} Safari/{webkit_version}
-  content.javascript.can_access_clipboard:
-    global: true
+  content.javascript.clipboard:
+    global: access
   content.notifications.enabled:
     https://crohasit.net: false
     https://gamdie.com: false
+    https://pdf.wondershare.com: false
     https://sea.mashable.com: false
     https://smallseotools.com: false
     https://www.facebook.com: false
@@ -76,6 +77,13 @@ settings:
     global: true
   content.register_protocol_handler:
     https://mail.google.com?extsrc=mailto&url=%25s: false
+  editor.command:
+    global:
+    - nvim
+    - -f
+    - '{file}'
+    - -c
+    - normal {line}G{column0}l
   fonts.default_family:
     global: Inter
   fonts.default_size:

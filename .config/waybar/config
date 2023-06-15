@@ -2,8 +2,9 @@
    //------------------------------
    // Configuration
    //------------------------------
-   "margin": "6 6 0 6",
+   "margin": "0 6 0 6",
    "height": 31,
+   "layer": "top",
    
    //------------------------------
    // Modules
@@ -20,7 +21,7 @@
    },
    "hyprland/window": {
       "format": "{}",
-      "max-length": 100,
+      "max-length": 70,
       "separate-outputs": true,
    },
 
@@ -47,7 +48,6 @@
    "clock": {
       "format": "{:%I:%M %p / %d %b %Y}",
       "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-      "format-alt": "{:%b %d, %Y}"
    },
    "tray": {
       "icon-size": 16,

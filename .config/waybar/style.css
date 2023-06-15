@@ -55,15 +55,15 @@ tooltip {
 }
 
 #workspaces button.active {
-   background: @blue;
    font-weight: bold;
-   color: @base;
+   color: @text;
+   border-bottom: 2px solid @blue;
 }
 
 #workspaces button.urgent {
-   background: @red;
    font-weight: bold;
-   color: @base;
+   color: @text;
+   border-bottom: 2px solid @red;
 }
 
 #network,#backlight,#wireplumber,#clock {

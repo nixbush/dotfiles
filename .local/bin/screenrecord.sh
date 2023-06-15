@@ -19,7 +19,7 @@ usage() {
 # ------------------------------
 DIRECTORY="$HOME/Videos/Screenrecord"
 
-DATE=$(date +%Y-%m-%d)
+DATE=$(date +%d-%m-%Y)
 TIME=$(date +%H-%M-%S)
 
 FILENAME="$DIRECTORY/screenrecord_$DATE-$TIME.mp4"
