@@ -13,9 +13,9 @@ settings:
   colors.tabs.pinned.even.bg:
     global: darkseagreen
   colors.webpage.bg:
-    global: '#24273a'
+    global: white
   colors.webpage.darkmode.algorithm:
-    global: lightness-cielab
+    global: brightness-rgb
   colors.webpage.darkmode.enabled:
     global: false
   colors.webpage.darkmode.grayscale.all:
@@ -46,7 +46,7 @@ settings:
     - https://raw.githubusercontent.com/bongochong/CombinedPrivacyBlockLists/master/cpbl-abp-list.txt
     - https://easylist-downloads.adblockplus.org/fanboy-social.txt
   content.blocking.enabled:
-    global: false
+    global: true
   content.blocking.method:
     global: both
   content.cookies.accept:
@@ -57,7 +57,7 @@ settings:
     global: Mozilla/5.0 ({os_info}) AppleWebKit/{webkit_version} (KHTML, like Gecko)
       {qt_key}/{qt_version} {upstream_browser_key}/{upstream_browser_version} Safari/{webkit_version}
   content.javascript.clipboard:
-    global: access
+    global: access-paste
   content.notifications.enabled:
     https://crohasit.net: false
     https://gamdie.com: false
@@ -88,8 +88,14 @@ settings:
     global: Inter
   fonts.default_size:
     global: 10pt
+  fonts.web.family.cursive:
+    global: null
+  fonts.web.family.fantasy:
+    global: null
   fonts.web.family.fixed:
     global: UbuntuMono Nerd Font
+  fonts.web.family.sans_serif:
+    global: null
   fonts.web.family.serif:
     global: null
   fonts.web.family.standard:

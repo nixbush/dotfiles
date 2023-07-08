@@ -124,7 +124,7 @@ require('cokeline').setup {
    },
 
    sidebar = {
-      filetype = 'netrw',
+      filetype = 'NvimTree',
       components = {
          {
             text = '  File Browser',

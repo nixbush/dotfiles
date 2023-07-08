@@ -25,6 +25,7 @@ local packages = {
    'numToStr/Comment.nvim',
    'nvim-telescope/telescope.nvim',
    'christoomey/vim-tmux-navigator',
+   'nvim-tree/nvim-tree.lua',
 
    -- Themes
    { 'catppuccin/nvim', as = 'catppuccin' },

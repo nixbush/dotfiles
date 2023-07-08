@@ -86,10 +86,10 @@ if $OPTIMIZE_RECORD; then
 fi
 
 if $STOP_RECORDING; then
-   pkill -f wf-recorder
+   killall -s SIGINT wf-recorder
    notify-send -u low -t 5000 "Screen Recording" "Stopped currently active screen recording!"
    exit 0
 fi
 
 notify-send -u low -t 5000 "Screen Recording" "Currently started screen recording!"
-wf-recorder -f "$FILENAME" -c "$CODEC" -d "$DEVICE" ${WF_RECORDER_FLAGS[@]}
+wf-recorder -f "$FILENAME" -c "$CODEC" -d "$DEVICE" ${WF_RECORDER_FLAGS[@]} > /tmp/record.log
