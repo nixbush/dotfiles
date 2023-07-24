@@ -68,11 +68,12 @@ settings:
     https://www.fotor.com: false
     https://www.messenger.com: false
     https://www.reddit.com: false
+    https://www.tiktok.com: false
     https://www.youtube.com: false
   content.notifications.presenter:
     global: libnotify
   content.pdfjs:
-    global: false
+    global: true
   content.prefers_reduced_motion:
     global: true
   content.register_protocol_handler:
