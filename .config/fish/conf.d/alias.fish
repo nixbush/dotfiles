@@ -8,4 +8,4 @@ alias hibernate '/usr/bin/systemctl hibernate'
 alias tree '/usr/bin/tree -aCL 3 --gitignore --dirsfirst'
 alias dotfiles '/usr/bin/git --git-dir=$HOME/.repos/dotfiles --work-tree=$HOME'
 alias cbclr '/usr/bin/wl-copy -c; wl-copy -cp' # clear clipboard
-alias vg '/usr/bin/valgrind --leak-check=full --show-leak-kinds=all --keep-debuginfo=yes --track-origins=yes'
+alias vg '/usr/bin/valgrind --leak-check=full --show-reachable=no --keep-debuginfo=yes --track-origins=yes'

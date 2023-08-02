@@ -13,9 +13,9 @@ settings:
   colors.tabs.pinned.even.bg:
     global: darkseagreen
   colors.webpage.bg:
-    global: white
+    global: '#24273a'
   colors.webpage.darkmode.algorithm:
-    global: brightness-rgb
+    global: lightness-cielab
   colors.webpage.darkmode.enabled:
     global: false
   colors.webpage.darkmode.grayscale.all:
@@ -56,8 +56,6 @@ settings:
   content.headers.user_agent:
     global: Mozilla/5.0 ({os_info}) AppleWebKit/{webkit_version} (KHTML, like Gecko)
       {qt_key}/{qt_version} {upstream_browser_key}/{upstream_browser_version} Safari/{webkit_version}
-  content.javascript.clipboard:
-    global: access-paste
   content.notifications.enabled:
     https://crohasit.net: false
     https://gamdie.com: false
@@ -133,4 +131,4 @@ settings:
   url.start_pages:
     global: https://search.brave.com
   window.hide_decoration:
-    global: false
+    global: true
