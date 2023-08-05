@@ -37,6 +37,7 @@ local packages = {
    },
    'rebelot/heirline.nvim',
    'willothy/nvim-cokeline',
+   'lukas-reineke/indent-blankline.nvim'
 }
 
 ---------------------------------
