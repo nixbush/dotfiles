@@ -1,4 +1,4 @@
-local dap = require 'dap'
+--[[ local dap = require 'dap'
 local dapui = require 'dapui'
 
 ---------------------------------
@@ -103,4 +103,4 @@ dap.listeners.before.event_terminated['dapui_config'] = function()
 end
 dap.listeners.before.event_exited['dapui_config'] = function()
    dapui.close()
-end
+end ]]
