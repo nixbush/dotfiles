@@ -16,9 +16,9 @@ local packages = {
    'hrsh7th/cmp-nvim-lsp-signature-help',
    'dcampos/cmp-snippy',
    'dcampos/nvim-snippy',
-   'jose-elias-alvarez/null-ls.nvim',
-   'mfussenegger/nvim-dap',
-   'rcarriga/nvim-dap-ui',
+   -- 'mfussenegger/nvim-dap',
+   -- 'rcarriga/nvim-dap-ui',
+   'nvimdev/guard.nvim',
 
    -- Quality of Life
    'windwp/nvim-autopairs',
