@@ -129,7 +129,7 @@ require('cokeline').setup {
          {
             text = '  File Browser',
             fg = colors.yellow,
-            bg = 'base',
+            bg = colors.mantle,
             style = 'bold',
          },
       },
