@@ -13,7 +13,7 @@ settings:
   colors.tabs.pinned.even.bg:
     global: darkseagreen
   colors.webpage.bg:
-    global: '#24273a'
+    global: white
   colors.webpage.darkmode.algorithm:
     global: lightness-cielab
   colors.webpage.darkmode.enabled:
@@ -58,6 +58,10 @@ settings:
       {qt_key}/{qt_version} {upstream_browser_key}/{upstream_browser_version} Safari/{webkit_version}
   content.javascript.clipboard:
     global: access-paste
+  content.media.audio_capture:
+    https://meet.google.com: true
+  content.media.video_capture:
+    https://meet.google.com: true
   content.notifications.enabled:
     https://crohasit.net: false
     https://gamdie.com: false

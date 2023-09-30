@@ -49,21 +49,16 @@ tooltip {
    padding: 5px 10px;
 }
 
-#workspaces button:hover {
-   color: @text;
-   padding: 5px 10px;
-}
-
 #workspaces button.active {
    font-weight: bold;
    color: @text;
    border-bottom: 2px solid @blue;
 }
 
-#workspaces button.urgent {
+#workspaces button.visible {
    font-weight: bold;
    color: @text;
-   border-bottom: 2px solid @red;
+   border-bottom: 2px solid @text;
 }
 
 #network,#backlight,#wireplumber,#clock {

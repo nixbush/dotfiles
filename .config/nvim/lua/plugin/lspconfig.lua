@@ -164,3 +164,9 @@ lspconfig.rust_analyzer.setup {
       },
    },
 }
+
+lspconfig.arduino_language_server.setup {
+   on_attach = common_on_attach,
+   handlers = common_handlers,
+   capabilities = common_capabilities,
+}

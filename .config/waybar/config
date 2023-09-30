@@ -9,18 +9,20 @@
    //------------------------------
    // Modules
    //------------------------------
-   "modules-left": ["wlr/workspaces", "hyprland/window"],
+   "modules-left": ["hyprland/workspaces", "hyprland/window"],
    "modules-center": [],
    "modules-right": ["network", "backlight", "wireplumber", "clock", "tray"],
 
-   "wlr/workspaces": {
-      "format": "{name}",
-      "on-scroll-up": "hyprctl dispatch workspace e+1",
-      "on-scroll-down": "hyprctl dispatch workspace e-1",
-      "on-click": "activate"
+   "hyprland/workspaces": {
+      "active-only": true,
+      "format": "{name}"
    },
+
    "hyprland/window": {
-      "format": "{}",
+      "format": "{title}",
+      "rewrite": {
+         "": "No window?"
+      },
       "max-length": 70,
       "separate-outputs": true,
    },

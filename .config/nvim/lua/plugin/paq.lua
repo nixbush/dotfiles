@@ -19,6 +19,7 @@ local packages = {
    -- 'mfussenegger/nvim-dap',
    -- 'rcarriga/nvim-dap-ui',
    'nvimdev/guard.nvim',
+   'stevearc/vim-arduino',
 
    -- Quality of Life
    'windwp/nvim-autopairs',
@@ -37,7 +38,7 @@ local packages = {
    },
    'rebelot/heirline.nvim',
    'willothy/nvim-cokeline',
-   'lukas-reineke/indent-blankline.nvim'
+   'lukas-reineke/indent-blankline.nvim',
 }
 
 ---------------------------------
