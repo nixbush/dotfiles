@@ -3,7 +3,7 @@
    // Configuration
    //------------------------------
    "margin": "0 6 0 6",
-   "height": 31,
+   "height": 35,
    "layer": "top",
    
    //------------------------------
@@ -24,7 +24,7 @@
          "": "No window?"
       },
       "max-length": 70,
-      "separate-outputs": true,
+      "separate-outputs": true
    },
 
    "network": {
@@ -33,7 +33,7 @@
       "format-wifi": "<span color=\"#a6da95\"> </span> {essid}",
       "format-ethernet": "<span color=\"#a6da95\">󰈀 </span> Ethernet",
       "format-disconnected": "<span color=\"#ed8796\">󰖪 </span>  Disconnected",
-      "tooltip-format": "{essid}",
+      "tooltip-format": "{essid}"
    },
 	"backlight": {
 		"format": "<span color=\"#eed49f\">{icon}</span> {percent:>3}%",
@@ -45,14 +45,16 @@
       "on-click": "pavucontrol",
 		"format": "<span color=\"#8aadf4\">{icon}</span> {volume:>3}%",
       "format-muted": "<span color=\"#ed8796\">󰝟 </span> Muted",
-      "format-icons": ["󰕿", "󰖀", "󰕾"],
+      "format-icons": ["󰕿", "󰖀", "󰕾"]
    },
    "clock": {
       "format": "{:%I:%M %p / %d %b %Y}",
-      "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+      "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
    },
    "tray": {
       "icon-size": 16,
       "spacing": 0
-   },
+   }
 }
+
+// vim: ft=json

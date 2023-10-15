@@ -53,9 +53,10 @@ settings:
     global: all
   content.geolocation:
     https://www.google.com: false
+    https://www.speedtest.net: false
   content.headers.user_agent:
-    global: Mozilla/5.0 ({os_info}) AppleWebKit/{webkit_version} (KHTML, like Gecko)
-      {qt_key}/{qt_version} {upstream_browser_key}/{upstream_browser_version} Safari/{webkit_version}
+    global: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like
+      Gecko) Chrome/117.0.0.0 Safari/537.36
   content.javascript.clipboard:
     global: access-paste
   content.media.audio_capture:

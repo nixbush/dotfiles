@@ -9,7 +9,7 @@ alias cp '/usr/bin/cp -r'
 alias tree '/usr/bin/tree -aCL 3 --gitignore --dirsfirst'
 
 # Custom
-alias purge '/usr/bin/rm -r'
+alias purge '/usr/bin/rm -ri'
 alias hibernate '/usr/bin/systemctl hibernate'
 alias vg '/usr/bin/valgrind --leak-check=full --show-reachable=no --keep-debuginfo=yes --track-origins=yes'
 alias dotfiles '/usr/bin/git --git-dir=$HOME/.repos/dotfiles --work-tree=$HOME'
