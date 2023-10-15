@@ -1,48 +1,53 @@
----------------------------------
--- LSP UI customization
----------------------------------
--- Change diagnostic signs
-local signs = { Error = ' ', Warn = ' ', Hint = ' ', Info = ' ' }
-for type, icon in pairs(signs) do
-   local hl = 'DiagnosticSign' .. type
-   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-end
-
--- Change diagnostic config
-vim.diagnostic.config {
-   virtual_text = {
-      source = 'always',
-      prefix = '󰧞',
-   },
-   float = {
-      focusable = false,
-      close_events = {
-         'BufLeave',
-         'CursorMoved',
-         'InsertEnter',
-         'FocusLost',
-      },
-      border = 'single',
-      source = 'always',
-      prefix = ' ',
-      scope = 'line', -- cursor
-   },
-   signs = true,
-   underline = true,
-   update_in_insert = false,
-   severity_sort = true,
+local M = {
+   'neovim/nvim-lspconfig',
+   dependencies = { 'nvimdev/guard.nvim' },
+   ft = { 'c', 'cpp', 'lua' },
 }
 
 ---------------------------------
--- LSP Attachments
+-- LSP Setup
 ---------------------------------
-local common_capabilities = require('cmp_nvim_lsp').default_capabilities()
-common_capabilities.textDocument.foldingRange = {
+M.init = function()
+   -- Change diagnostic signs
+   local signs = { Error = ' ', Warn = ' ', Hint = ' ', Info = ' ' }
+   for type, icon in pairs(signs) do
+      local hl = 'DiagnosticSign' .. type
+      vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+   end
+
+   -- change diagnostic config
+   vim.diagnostic.config {
+      virtual_text = {
+         source = 'always',
+         prefix = '󰧞',
+      },
+      float = {
+         focusable = false,
+         close_events = {
+            'bufleave',
+            'cursormoved',
+            'insertenter',
+            'focuslost',
+         },
+         border = 'single',
+         source = 'always',
+         prefix = ' ',
+         scope = 'line', -- cursor
+      },
+      signs = true,
+      underline = true,
+      update_in_insert = false,
+      severity_sort = true,
+   }
+end
+
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+capabilities.textDocument.foldingRange = {
    dynamicRegistration = false,
    lineFoldingOnly = true,
 }
 
-local common_handlers = {
+local handlers = {
    ['textDocument/hover'] = vim.lsp.with(
       vim.lsp.handlers.hover,
       { border = 'single' }
@@ -57,8 +62,29 @@ local common_handlers = {
    ),
 }
 
-local common_on_attach = function(_, bufnr)
+local on_attach = function(_, bufnr)
    -- Set mappings
+   local wk = require 'which-key'
+   wk.register {
+      ['<leader>l'] = {
+         D = 'Goto declaration',
+         d = 'Goto definition',
+         h = 'Open Hover window',
+         i = 'Goto implementation',
+         s = 'Open signature help',
+         t = 'Goto type definition',
+         r = 'Rename under cursor',
+         a = 'Open code actions',
+         q = 'List references',
+         e = 'Open diagnostic window',
+         l = 'Open diagnostic loclist',
+         L = 'Open diagnostic quickfix',
+         f = 'Format selected',
+      },
+      ['[e'] = 'Goto prev diagnostic',
+      [']e'] = 'Goto next diagnostic',
+   }
+
    local map = function(mode, key, cmd)
       vim.keymap.set(mode, key, cmd, { buffer = bufnr })
    end
@@ -79,94 +105,58 @@ local common_on_attach = function(_, bufnr)
    map('n', '<leader>lf', function()
       vim.lsp.buf.format { bufnr = 0, timeout_ms = 5000 }
    end)
-   map({ 'n', 'v', 'x' }, '<leader>lF', require('utils').range_format)
 end
 
 ---------------------------------
--- LSP Configuration
+-- LSP Config
 ---------------------------------
-local lspconfig = require 'lspconfig'
+M.config = function()
+   local lspconfig = require 'lspconfig'
 
-lspconfig.lua_ls.setup {
-   on_attach = common_on_attach,
-   handlers = common_handlers,
-   capabilities = common_capabilities,
-   settings = {
-      Lua = {
-         runtime = {
-            version = 'LuaJIT',
-         },
-         diagnostics = {
-            globals = { 'vim' },
-         },
-         workspace = {
-            library = vim.env.VIMRUNTIME,
-         },
-         telemetry = {
-            enable = false,
-         },
-      },
-   },
-}
-
-lspconfig.clangd.setup {
-   capabilities = common_capabilities,
-   on_attach = function(client, bufnr)
-      common_on_attach(client, bufnr)
-      vim.keymap.set(
-         'n',
-         'gs',
-         '<cmd>ClangdSwitchSourceHeader<cr>',
-         { buffer = bufnr }
-      )
-   end,
-   handlers = common_handlers,
-   cmd = {
-      '/usr/bin/clangd',
-      '--background-index',
-      '--compile-commands-dir=build/',
-      '--header-insertion-decorators=0',
-      '--header-insertion=never',
-      '--offset-encoding=utf-16',
-      '--malloc-trim',
-   },
-}
-
-lspconfig.rust_analyzer.setup {
-   on_attach = common_on_attach,
-   handlers = common_handlers,
-   capabilities = common_capabilities,
-   cmd = {
-      '/usr/bin/rustup',
-      'run',
-      'stable',
-      'rust-analyzer',
-   },
-   settings = {
-      ['rust-analyzer'] = {
-         checkOnSave = {
-            command = 'clippy',
-         },
-         imports = {
-            granularity = {
-               group = 'module',
+   lspconfig.lua_ls.setup {
+      capabilities = capabilities,
+      on_attach = on_attach,
+      handlers = handlers,
+      settings = {
+         Lua = {
+            runtime = {
+               version = 'LuaJIT',
             },
-            prefix = 'self',
-         },
-         cargo = {
-            buildScripts = {
-               enable = true,
+            diagnostics = {
+               globals = { 'vim' },
+            },
+            workspace = {
+               library = vim.env.VIMRUNTIME,
+            },
+            telemetry = {
+               enable = false,
             },
          },
-         procMacro = {
-            enable = true,
-         },
       },
-   },
-}
+   }
 
-lspconfig.arduino_language_server.setup {
-   on_attach = common_on_attach,
-   handlers = common_handlers,
-   capabilities = common_capabilities,
-}
+   lspconfig.clangd.setup {
+      capabilities = capabilities,
+      on_attach = function(client, bufnr)
+         on_attach(client, bufnr)
+         vim.keymap.set(
+            'n',
+            'gs',
+            '<cmd>ClangdSwitchSourceHeader<cr>',
+            { buffer = bufnr }
+         )
+      end,
+      handlers = handlers,
+      cmd = {
+         '/usr/bin/clangd',
+         '--background-index',
+         '--compile-commands-dir=build/',
+         '--header-insertion-decorators=0',
+         '--header-insertion=never',
+         '--offset-encoding=utf-16',
+         '--malloc-trim',
+      },
+   }
+end
+
+return M

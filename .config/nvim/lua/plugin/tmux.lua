@@ -1,9 +1,12 @@
-local map = vim.keymap.set
-
-vim.g.tmux_navigator_no_mappings = 1 -- use my own mappings
-map({ 'n', 'i', 't' }, '<A-h>', '<cmd>TmuxNavigateLeft<cr>')
-map({ 'n', 'i', 't' }, '<A-j>', '<cmd>TmuxNavigateDown<cr>')
-map({ 'n', 'i', 't' }, '<A-k>', '<cmd>TmuxNavigateUp<cr>')
-map({ 'n', 'i', 't' }, '<A-l>', '<cmd>TmuxNavigateRight<cr>')
-map({ 'n', 'i', 't' }, '<A-{>', '<cmd>TmuxNavigatePrevious<cr>')
-map({ 'n', 'i', 't' }, '<A-;>', '<cmd>call system("tmux send-keys M-\\;")<cr>')
+return {
+   'christoomey/vim-tmux-navigator',
+   init = function()
+      vim.g.tmux_navigator_no_mappings = 1
+   end,
+   keys = {
+      { '<A-h>', ':<C-U>TmuxNavigateLeft<cr>', silent = true },
+      { '<A-j>', ':<C-U>TmuxNavigateDown<cr>', silent = true },
+      { '<A-k>', ':<C-U>TmuxNavigateUp<cr>', silent = true },
+      { '<A-l>', ':<C-U>TmuxNavigateRight<cr>', silent = true },
+   },
+}

@@ -9,49 +9,33 @@ vim.g.maplocalleader = ';'
 ---------------------------------
 local map = vim.keymap.set
 
--- Save, quit and load
-map('n', 'Q', function() -- Close buffers
-   local buflisted = vim.fn.getbufinfo { buflisted = 1 }
-   local cur_winnr, cur_bufnr = vim.fn.winnr(), vim.fn.bufnr()
+-- Better up and down
+map(
+   { 'n', 'x' },
+   'j',
+   "v:count == 0 ? 'gj' : 'j'",
+   { expr = true, silent = true }
+)
+map(
+   { 'n', 'x' },
+   'k',
+   "v:count == 0 ? 'gk' : 'k'",
+   { expr = true, silent = true }
+)
 
-   -- auto-quit
-   if vim.bo.buftype ~= '' then
-      vim.cmd 'confirm q'
-      return
-   end
-
-   if #buflisted < 2 then
-      vim.cmd 'confirm qall'
-      return
-   end
-
-   -- buffer movement
-   for _, winid in ipairs(vim.fn.getbufinfo(cur_bufnr)[1].windows) do
-      vim.cmd(string.format('%d wincmd w', vim.fn.win_id2win(winid)))
-      vim.cmd(cur_bufnr == buflisted[#buflisted].bufnr and 'bp' or 'bn')
-   end
-   vim.cmd(string.format('%d wincmd w', cur_winnr))
-
-   -- terminal management
-   local is_terminal = vim.fn.getbufvar(cur_bufnr, '&buftype') == 'terminal'
-   vim.cmd(is_terminal and 'bd! #' or 'silent! confirm bd #')
-end)
-map('n', '<leader>q', '<cmd>confirm qall<cr>')
-map('n', 'E', function() -- Window close
-   if #vim.api.nvim_list_wins() > 1 then
-      vim.cmd 'q'
-   else
-      print 'Cannot close last window'
-   end
-end)
+-- Buffers
 map('n', 'W', vim.cmd.write)
+map('n', 'Q', vim.cmd.bdelete)
 map('n', 'S', vim.cmd.source)
-
--- Move between buffers and tabs
+map('n', 'E', '<cmd>confirm qall!<cr>')
 map('n', 'L', vim.cmd.bnext)
 map('n', 'H', vim.cmd.bprev)
-map('n', '<C-l>', vim.cmd.tabn)
-map('n', '<C-h>', vim.cmd.tabp)
+
+-- Tabs
+map('n', '<C-n>', vim.cmd.tabnew)
+map('n', '<C-q>', vim.cmd.tabclose)
+map('n', '<C-l>', vim.cmd.tabnext)
+map('n', '<C-h>', vim.cmd.tabprevious)
 
 -- Move to other windows
 map('n', '<A-h>', '<C-w>h')
@@ -91,37 +75,17 @@ map('n', '<', '<<')
 map('v', '>', '>gv')
 map('v', '<', '<gv')
 
--- Search but lock cursor in the middle
-map('n', 'n', 'nzzzv')
-map('n', 'N', 'Nzzzv')
-map('n', '<C-u>', '<C-u>zz')
-map('n', '<C-d>', '<C-d>zz')
-
--- Join lines but better
-map('n', 'J', 'mzJ`z')
-
 -- Clear search highlight
-map('n', '<leader>c', vim.cmd.nohlsearch)
+map('n', '<ESC>', '<cmd>noh<cr><esc>')
 
--- Terminal escape
-map('t', '<A-ESC>', '<C-\\><C-n><Esc>')
+-- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
+map('n', 'n', "'Nn'[v:searchforward]", { expr = true })
+map('x', 'n', "'Nn'[v:searchforward]", { expr = true })
+map('o', 'n', "'Nn'[v:searchforward]", { expr = true })
+map('n', 'N', "'nN'[v:searchforward]", { expr = true })
+map('x', 'N', "'nN'[v:searchforward]", { expr = true })
+map('o', 'N', "'nN'[v:searchforward]", { expr = true })
 
 -- Quickfix list
 map('n', ']f', '<cmd>cnext<cr>')
 map('n', '[f', '<cmd>cprev<cr>')
-map('n', 'gq', function() -- Toggle quickfix
-   local f = vim.fn
-   if f.empty(f.filter(f.getwininfo(), 'v:val.quickfix')) == 1 then
-      vim.cmd 'copen'
-   else
-      vim.cmd 'cclose'
-   end
-end)
-map('n', 'gl', function() -- Toggle loclist
-   local f = vim.fn
-   if f.empty(f.filter(f.getwininfo(), 'v:val.loclist')) == 1 then
-      vim.cmd 'lopen'
-   else
-      vim.cmd 'lclose'
-   end
-end)

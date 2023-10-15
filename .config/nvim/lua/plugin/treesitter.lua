@@ -1,28 +1,31 @@
-require('nvim-treesitter.configs').setup {
-   incremental_selection = {
-      enable = true,
-      keymaps = {
-         init_selection = 'gnn',
-         node_incremental = 'grn',
-         scope_incremental = 'grc',
-         node_decremental = 'grm',
-      },
-   },
-   highlight = {
-      enable = true,
-      disable = function(_, buf)
-         local max_filesize = 1000 * 1024 -- 1MB
-         local ok, stats =
-            pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-         if ok and stats and stats.size > max_filesize then
-            return true
-         end
-      end,
-   },
-   autopairs = {
-      enable = true,
-   },
-}
+local ft = { 'c', 'cpp', 'lua', 'bash' }
 
-vim.o.foldmethod = 'expr'
-vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
+return {
+   'nvim-treesitter/nvim-treesitter',
+   config = function()
+      require('nvim-treesitter.configs').setup {
+         ensure_installed = ft,
+         sync_install = false,
+         highlight = {
+            enable = true,
+         },
+         indent = {
+            enable = true,
+         },
+         incremental_selection = {
+            enable = true,
+            keymaps = {
+               init_selection = 'gnn', -- set to `false` to disable one of the mappings
+               node_incremental = 'grn',
+               scope_incremental = 'grc',
+               node_decremental = 'grm',
+            },
+         },
+      }
+      vim.wo.foldmethod = 'expr'
+      vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
+      vim.wo.foldenable = false
+   end,
+   build = ':TSUpdate',
+   ft = ft,
+}

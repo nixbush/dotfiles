@@ -1,19 +1,22 @@
-require('catppuccin').setup {
-   flavour = 'macchiato',
-   background = {
-      light = 'latte',
-      dark = 'macchiato',
-   },
-   term_colors = true,
-   custom_highlights = function(colors)
-      return {
-         DapBreakpoint = { fg = colors.red },
-         DapBreakpointCondition = { fg = colors.mauve },
-         DapLogPoint = { fg = colors.blue },
-         DapStopped = { fg = colors.green },
-         DapBreakpointRejected = { fg = colors.overlay0 },
+return {
+   'catppuccin/nvim',
+   name = 'catppuccin',
+   lazy = false,
+   priority = 1000,
+   config = function()
+      require('catppuccin').setup {
+         flavour = 'macchiato',
+         custom_highlights = function(colors)
+            return {
+               IndentLineChar = { fg = colors.surface0 },
+               IndentLineContextChar = { fg = colors.overlay1 },
+            }
+         end,
+         integrations = {
+            markdown = true,
+            dashboard = true,
+         },
       }
+      vim.cmd 'colorscheme catppuccin'
    end,
 }
-
-vim.cmd.colorscheme 'catppuccin-macchiato'
