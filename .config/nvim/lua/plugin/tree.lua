@@ -3,7 +3,6 @@ return {
    dependencies = { 'nvim-tree/nvim-web-devicons' },
    opts = {},
    config = true,
-   event = 'VeryLazy',
    keys = {
       {
          '<localleader>e',

@@ -67,6 +67,7 @@ local on_attach = function(_, bufnr)
    local wk = require 'which-key'
    wk.register {
       ['<leader>l'] = {
+         name = 'LSP Actions',
          D = 'Goto declaration',
          d = 'Goto definition',
          h = 'Open Hover window',

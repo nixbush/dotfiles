@@ -89,3 +89,15 @@ map('o', 'N', "'nN'[v:searchforward]", { expr = true })
 -- Quickfix list
 map('n', ']f', '<cmd>cnext<cr>')
 map('n', '[f', '<cmd>cprev<cr>')
+map(
+   'n',
+   '<leader>qf',
+   require('utils.qflist').toggle_quickfix,
+   { desc = 'Toggle Quickfix List' }
+)
+map(
+   'n',
+   '<leader>ql',
+   require('utils.qflist').toggle_loclist,
+   { desc = 'Toggle Location List' }
+)
