@@ -5,5 +5,11 @@ return {
       vim.o.timeout = true
       vim.o.timeoutlen = 300
    end,
-   config = true,
+   config = function()
+      local wk = require 'which-key'
+      wk.setup()
+      wk.register {
+         ['<leader>q'] = { name = 'Quickfix Actions' },
+      }
+   end,
 }

@@ -11,6 +11,12 @@ local mkdir_on_save = function()
    end
 end
 
+local configure_terminal = function ()
+   vim.api.nvim_win_set_option(0, 'number', false)
+   vim.api.nvim_win_set_option(0, 'relativenumber', false)
+   vim.cmd('startinsert')
+end
+
 ---------------------------------
 -- Auto commands
 ---------------------------------
@@ -24,4 +30,10 @@ vim.api.nvim_clear_autocmds {
 vim.api.nvim_create_autocmd('BufWritePre', {
    group = augroup,
    callback = mkdir_on_save,
+})
+
+-- Configure terminal
+vim.api.nvim_create_autocmd('TermOpen', {
+   group = augroup,
+   callback = configure_terminal,
 })

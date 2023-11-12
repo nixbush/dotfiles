@@ -1,6 +1,6 @@
 return {
    'nvimdev/dashboard-nvim',
-   enabled = function()
+   cond = function()
       return vim.fn.argc() == 0
    end,
    dependencies = { 'nvim-tree/nvim-web-devicons' },

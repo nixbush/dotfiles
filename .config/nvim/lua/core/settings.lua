@@ -32,10 +32,7 @@ o.fillchars = {
 o.foldenable = false
 o.foldminlines = 1
 o.foldnestmax = 3
---o.foldtext =
---   [[substitute(getline(v:foldstart),'\\t',repeat('\ ',&tabstop),'g').'…'.trim(getline(v:foldend)).' ('.(v:foldend - v:foldstart + 1).' lines)']]
 o.foldmethod = 'indent'
--- o.guifont = { 'UbuntuMono Nerd Font', '14' }
 o.number = true
 o.relativenumber = true
 o.shellpipe = '>&2 | tee %s; return $pipestatus[1]'

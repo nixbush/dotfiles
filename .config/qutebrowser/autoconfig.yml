@@ -83,6 +83,7 @@ settings:
     global: true
   content.register_protocol_handler:
     https://mail.google.com?extsrc=mailto&url=%25s: false
+    https://mail.proton.me#mailto=%25s: false
   editor.command:
     global:
     - nvim

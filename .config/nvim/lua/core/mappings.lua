@@ -70,13 +70,14 @@ map('v', '<C-j>', ":m'>+<cr>`<my`>mzgv`yo`z")
 map('v', '<C-k>', ":m'<-2<cr>`>my`<mzgv`yo`z")
 
 -- Indentations
-map('n', '>', '>>')
-map('n', '<', '<<')
-map('v', '>', '>gv')
-map('v', '<', '<gv')
+map('v', '>>', '>gv')
+map('v', '<<', '<gv')
 
 -- Clear search highlight
 map('n', '<ESC>', '<cmd>noh<cr><esc>')
+
+-- Exit terminal
+map('n', '<A-ESC>', '<C-\\><C-n><esc>')
 
 -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
 map('n', 'n', "'Nn'[v:searchforward]", { expr = true })

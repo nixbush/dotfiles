@@ -5,15 +5,10 @@ return {
       'nvim-tree/nvim-web-devicons',
    },
    init = function()
-      local map = vim.keymap.set
-      map('n', '<leader>ff', '<cmd>Telescope find_files hidden=true<cr>')
-      map('n', '<leader>fg', '<cmd>Telescope git_files hidden=true<cr>')
-      map('n', '<leader>fs', '<cmd>Telescope live_grep hidden=true<cr>')
-      map('n', '<leader>fh', '<cmd>Telescope help_tags<cr>')
-      map('n', '<leader>fb', '<cmd>Telescope buffers<cr>')
-      map('n', '<leader>fm', '<cmd>Telescope keymaps<cr>')
-      map('n', '<leader>fd', '<cmd>Telescope diagnostics bufnr=0<cr>')
-      map('n', '<leader>fD', '<cmd>Telescope diagnostics<cr>')
+      local wk = require 'which-key'
+      wk.register {
+         ['<leader>f'] = { name = 'Telescope Actions' },
+      }
    end,
    config = function()
       require('telescope').setup {
@@ -40,6 +35,21 @@ return {
    end,
    cmd = { 'Telescope' },
    keys = {
-      { '<leader>f', nil, desc = 'Telescope Actions' },
+      { '<leader>ff', '<cmd>Telescope find_files hidden=true<cr>', desc = 'Find files' },
+      { '<leader>fg', '<cmd>Telescope git_files hidden=true<cr>',  desc = 'Find files (Git)' },
+      { '<leader>fs', '<cmd>Telescope live_grep hidden=true<cr>',  desc = 'Grep string' },
+      { '<leader>fh', '<cmd>Telescope help_tags<cr>',              desc = 'Find Help' },
+      { '<leader>fb', '<cmd>Telescope buffers<cr>',                desc = 'Find buffer' },
+      { '<leader>fm', '<cmd>Telescope keymaps<cr>',                desc = 'Find keymap' },
+      {
+         '<leader>fd',
+         '<cmd>Telescope diagnostics bufnr=0<cr>',
+         desc = 'Find local diagnostics',
+      },
+      {
+         '<leader>fD',
+         '<cmd>Telescope diagnostics<cr>',
+         desc = 'Find project diagnostics',
+      },
    },
 }

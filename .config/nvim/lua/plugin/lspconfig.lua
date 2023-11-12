@@ -1,6 +1,6 @@
 local M = {
    'neovim/nvim-lspconfig',
-   dependencies = { 'nvimdev/guard.nvim' },
+   dependencies = { 'nvimtools/none-ls.nvim' },
    ft = { 'c', 'cpp', 'lua' },
 }
 
@@ -48,10 +48,7 @@ capabilities.textDocument.foldingRange = {
 }
 
 local handlers = {
-   ['textDocument/hover'] = vim.lsp.with(
-      vim.lsp.handlers.hover,
-      { border = 'single' }
-   ),
+   ['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'single' }),
    ['textDocument/publishDiagnostics'] = vim.lsp.with(
       vim.lsp.diagnostic.on_publish_diagnostics,
       { severity_sort = true }
@@ -64,48 +61,31 @@ local handlers = {
 
 local on_attach = function(_, bufnr)
    -- Set mappings
+   local map = function(mode, key, cmd, opts)
+      local options = vim.tbl_extend('force', opts, { buffer = bufnr })
+      vim.keymap.set(mode, key, cmd, options)
+   end
+
    local wk = require 'which-key'
    wk.register {
-      ['<leader>l'] = {
-         name = 'LSP Actions',
-         D = 'Goto declaration',
-         d = 'Goto definition',
-         h = 'Open Hover window',
-         i = 'Goto implementation',
-         s = 'Open signature help',
-         t = 'Goto type definition',
-         r = 'Rename under cursor',
-         a = 'Open code actions',
-         q = 'List references',
-         e = 'Open diagnostic window',
-         l = 'Open diagnostic loclist',
-         L = 'Open diagnostic quickfix',
-         f = 'Format selected',
-      },
-      ['[e'] = 'Goto prev diagnostic',
-      [']e'] = 'Goto next diagnostic',
+      ['<leader>l'] = 'LSP Actions',
    }
 
-   local map = function(mode, key, cmd)
-      vim.keymap.set(mode, key, cmd, { buffer = bufnr })
-   end
-   map('n', '<leader>lD', vim.lsp.buf.declaration)
-   map('n', '<leader>ld', vim.lsp.buf.definition)
-   map('n', '<leader>lh', vim.lsp.buf.hover)
-   map('n', '<leader>li', vim.lsp.buf.implementation)
-   map('n', '<leader>ls', vim.lsp.buf.signature_help)
-   map('n', '<leader>lt', vim.lsp.buf.type_definition)
-   map('n', '<leader>lr', vim.lsp.buf.rename)
-   map('n', '<leader>la', vim.lsp.buf.code_action)
-   map('n', '<leader>lq', vim.lsp.buf.references)
-   map('n', '<leader>le', vim.diagnostic.open_float)
-   map('n', '<leader>ll', vim.diagnostic.setloclist)
-   map('n', '<leader>lL', vim.diagnostic.setqflist)
-   map('n', '[e', vim.diagnostic.goto_prev)
-   map('n', ']e', vim.diagnostic.goto_next)
-   map('n', '<leader>lf', function()
-      vim.lsp.buf.format { bufnr = 0, timeout_ms = 5000 }
-   end)
+   map('n', '<leader>lD', vim.lsp.buf.declaration, { desc = 'Goto declaration' })
+   map('n', '<leader>ld', vim.lsp.buf.definition, { desc = 'Goto definition' })
+   map('n', '<leader>lh', vim.lsp.buf.hover, { desc = 'Open hover window' })
+   map('n', '<leader>li', vim.lsp.buf.implementation, { desc = 'Goto implementation' })
+   map('n', '<leader>ls', vim.lsp.buf.signature_help, { desc = 'Open signature help' })
+   map('n', '<leader>lt', vim.lsp.buf.type_definition, { desc = 'Goto type definition' })
+   map('n', '<leader>lr', vim.lsp.buf.rename, { desc = 'Rename under cursor' })
+   map('n', '<leader>la', vim.lsp.buf.code_action, { desc = 'Open code actions' })
+   map('n', '<leader>lq', vim.lsp.buf.references, { desc = 'List references' })
+   map('n', '<leader>lf', vim.lsp.buf.format, { desc = 'Format buffer' })
+   map('n', '<leader>le', vim.diagnostic.open_float, { desc = 'Open diagnostic window' })
+   map('n', '<leader>ll', vim.diagnostic.setloclist, { desc = 'Open diagnostic loclist' })
+   map('n', '<leader>lL', vim.diagnostic.setqflist, { desc = 'Open diagnostic quickfix' })
+   map('n', '[e', vim.diagnostic.goto_prev, 'Goto prev diagnostic')
+   map('n', ']e', vim.diagnostic.goto_next, 'Goto next diagnostic')
 end
 
 ---------------------------------
@@ -140,12 +120,7 @@ M.config = function()
       capabilities = capabilities,
       on_attach = function(client, bufnr)
          on_attach(client, bufnr)
-         vim.keymap.set(
-            'n',
-            'gs',
-            '<cmd>ClangdSwitchSourceHeader<cr>',
-            { buffer = bufnr }
-         )
+         vim.keymap.set('n', 'gs', '<cmd>ClangdSwitchSourceHeader<cr>', { buffer = bufnr })
       end,
       handlers = handlers,
       cmd = {
