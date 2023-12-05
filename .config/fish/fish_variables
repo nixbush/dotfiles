@@ -5,6 +5,7 @@ SETUVAR --export EDITOR:nvim
 SETUVAR --export LESS:\x2dFiJMRWXx3\x20\x2dz4
 SETUVAR --export QT_QPA_PLATFORM:wayland
 SETUVAR --export QT_QPA_PLATFORMTHEME:qt5ct
+SETUVAR --export TERMINAL:footclient
 SETUVAR --export XDG_CACHE_HOME:/home/nix/\x2ecache
 SETUVAR --export XDG_CONFIG_HOME:/home/nix/\x2econfig
 SETUVAR --export XDG_DATA_HOME:/home/nix/\x2elocal/share

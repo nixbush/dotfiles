@@ -29,55 +29,79 @@
 @define-color flamingo  #f0c6c6;
 @define-color rosewater #f4dbd6;
 
-* {
-   all: unset;
-   border: none;
-   font-family: "UbuntuMono Nerd Font";
-   font-size: 16px;
-}
-
 tooltip {
    background: @base;
 }
 
-#window {
-   padding: 5px 15px;
-}
-
-#workspaces button {
-   color: @text;
-   padding: 5px 10px;
-}
-
-#workspaces button.active {
-   font-weight: bold;
-   color: @text;
-   border-bottom: 2px solid @blue;
-}
-
-#workspaces button.visible {
-   font-weight: bold;
-   color: @text;
-   border-bottom: 2px solid @text;
-}
-
-#network,#backlight,#wireplumber,#clock {
-   color: @text;
-   padding: 5px 10px;
-}
-
-#network.disconnected {
-   color: @red;
-}
-
-#wireplumber.muted {
-   color: @red;
-}
-
 #clock {
+   font-family: Monaspace Krypton;
+   font-size: 14px;
+   padding: 0px 6px;
+}
+#window {
+   font-family: Monaspace Krypton;
+   font-size: 14px;
+   font-weight: bold;
+   background: @blue;
+   padding: 0px 6px;
+   color: @base;
+   border-radius: 0px 8px 0px 8px;
+}
+
+#workspaces {
+   font-family: Monaspace Krypton;
+   font-size: 14px;
+}
+#workspaces button {
+   border-radius: 0px;
+   background: @lavender;
+   font-weight: bold;
+   color: @base;
+}
+#workspaces button:first-child {
+   border-radius: 0px 0px 0px 8px;
+}
+#workspaces button:last-child {
+   border-radius: 0px 8px 0px 0px;
+}
+#workspaces button.empty {
+   background: @base;
+   font-weight: normal;
+   color: @text;
+}
+#workspaces button.active {
+   background: @blue;
+   color: @base;
+   font-weight: bold;
+}
+#workspaces button.urgent {
+   background: @red;
+   color: @base;
    font-weight: bold;
 }
 
+#backlight {
+   font-family: Monaspace Krypton;
+   font-size: 14px;
+   font-weight: bold;
+   padding: 0px 6px;
+   background: @green;
+   color: @base;
+   border-radius: 0px 0px 0px 8px;
+}
+#wireplumber {
+   font-family: Monaspace Krypton;
+   font-size: 14px;
+   font-weight: bold;
+   padding: 0px 6px;
+   background: @yellow;
+   color: @base;
+   border-radius: 0px 8px 0px 0px;
+}
 #tray {
-   padding: 5px;
+   padding: 0px 6px;
+   background: @crust;
+}
+#tray menu {
+   background: @base;
 }

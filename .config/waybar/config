@@ -2,58 +2,55 @@
    //------------------------------
    // Configuration
    //------------------------------
-   "margin": "0 6 0 6",
-   "height": 35,
+   "height": 36,
    "layer": "top",
-   
+
    //------------------------------
    // Modules
    //------------------------------
-   "modules-left": ["hyprland/workspaces", "hyprland/window"],
-   "modules-center": [],
-   "modules-right": ["network", "backlight", "wireplumber", "clock", "tray"],
+   "modules-left":   [ "clock#time", "hyprland/window" ],
+   "modules-center": [ "hyprland/workspaces" ],
+   "modules-right":  [ "backlight", "wireplumber", "clock#date", "tray" ],
 
-   "hyprland/workspaces": {
-      "active-only": true,
-      "format": "{name}"
+   "clock#time": {
+      "format": "{:%I:%M %p}",
+      "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
    },
-
    "hyprland/window": {
       "format": "{title}",
       "rewrite": {
          "": "No window?"
       },
-      "max-length": 70,
+      "max-length": 50,
       "separate-outputs": true
    },
 
-   "network": {
-      "interface": "wlp3s0", 
-      "format": "{ifname}",
-      "format-wifi": "<span color=\"#a6da95\"> </span> {essid}",
-      "format-ethernet": "<span color=\"#a6da95\">󰈀 </span> Ethernet",
-      "format-disconnected": "<span color=\"#ed8796\">󰖪 </span>  Disconnected",
-      "tooltip-format": "{essid}"
+   "hyprland/workspaces": {
+      "format": "{name}",
+      "persistent-workspaces": {
+         "*": 5
+      }
    },
+
 	"backlight": {
-		"format": "<span color=\"#eed49f\">{icon}</span> {percent:>3}%",
+		"format": "{icon} {percent:>3}%",
       "format-icons": ["󰃞 ", "󰃟 ", "󰃠 "],
       "on-scroll-up": "light -A 5",
 		"on-scroll-down": "light -U 5"
 	},
    "wireplumber": {
       "on-click": "pavucontrol",
-		"format": "<span color=\"#8aadf4\">{icon}</span> {volume:>3}%",
-      "format-muted": "<span color=\"#ed8796\">󰝟 </span> Muted",
+		"format": "{icon} {volume:>3}%",
+      "format-muted": "󰝟  Muted",
       "format-icons": ["󰕿", "󰖀", "󰕾"]
    },
-   "clock": {
-      "format": "{:%I:%M %p / %d %b %Y}",
+   "clock#date": {
+      "format": "{:%d %b %Y}",
       "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
    },
    "tray": {
-      "icon-size": 16,
-      "spacing": 0
+      "icon-size": 14,
+      "spacing": 6
    }
 }
 
