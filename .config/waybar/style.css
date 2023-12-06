@@ -33,19 +33,16 @@ tooltip {
    background: @base;
 }
 
-#clock {
-   font-family: Monaspace Krypton;
-   font-size: 14px;
-   padding: 0px 6px;
+* {
+   background: none;  
 }
+
 #window {
    font-family: Monaspace Krypton;
    font-size: 14px;
-   font-weight: bold;
-   background: @blue;
+   background: @base;
    padding: 0px 6px;
-   color: @base;
-   border-radius: 0px 8px 0px 8px;
+   border-radius: 0px 0px 8px 0px;
 }
 
 #workspaces {
@@ -62,7 +59,7 @@ tooltip {
    border-radius: 0px 0px 0px 8px;
 }
 #workspaces button:last-child {
-   border-radius: 0px 8px 0px 0px;
+   border-radius: 0px 0px 8px 0px;
 }
 #workspaces button.empty {
    background: @base;
@@ -83,25 +80,37 @@ tooltip {
 #backlight {
    font-family: Monaspace Krypton;
    font-size: 14px;
-   font-weight: bold;
-   padding: 0px 6px;
-   background: @green;
-   color: @base;
+   background: @base;
+   padding-left: 12px;
    border-radius: 0px 0px 0px 8px;
 }
 #wireplumber {
    font-family: Monaspace Krypton;
    font-size: 14px;
-   font-weight: bold;
-   padding: 0px 6px;
-   background: @yellow;
-   color: @base;
-   border-radius: 0px 8px 0px 0px;
+   background: @base;
+   padding-right: 6px;
+}
+#wireplumber.muted {
+   font-family: Monaspace Krypton;
+   font-size: 14px;
+   background: @base;
+   color: @red;
+   padding-right: 6px;
+}
+#clock {
+   font-family: Monaspace Krypton;
+   font-size: 14px;
+   background: @mantle;
+   padding: 0px 12px 0px 12px;
 }
 #tray {
-   padding: 0px 6px;
    background: @crust;
+   padding: 0px 6px;
 }
 #tray menu {
+   font-family: Inter;
+   font-size: 13px;
    background: @base;
+   font-family: Inter;
+   font-size: 13px;
 }

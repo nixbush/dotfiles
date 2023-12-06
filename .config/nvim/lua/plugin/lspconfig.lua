@@ -133,6 +133,12 @@ M.config = function()
          '--malloc-trim',
       },
    }
+
+   lspconfig.racket_langserver.setup {
+      capabilities = capabilities,
+      on_attach = on_attach,
+      handlers = handlers,
+   }
 end
 
 return M
