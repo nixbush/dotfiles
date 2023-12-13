@@ -41,6 +41,8 @@ o.signcolumn = 'yes:1'
 o.termguicolors = true
 o.wrap = false
 o.exrc = true
+o.laststatus = 0
+o.showtabline = 0
 
 ---------------------------------
 -- General

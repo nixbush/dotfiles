@@ -1,9 +1,9 @@
 return {
    'catppuccin/nvim',
    name = 'catppuccin',
-   lazy = false,
    priority = 1000,
-   config = function()
+   lazy = false,
+   config = function ()
       require('catppuccin').setup {
          flavour = 'macchiato',
          custom_highlights = function(colors)
@@ -12,11 +12,10 @@ return {
                IndentLineContextChar = { fg = colors.overlay1 },
             }
          end,
-         integrations = {
-            markdown = true,
-            dashboard = true,
-         },
+         dim_inactive = {
+            enabled = true,
+         }
       }
       vim.cmd 'colorscheme catppuccin'
-   end,
+   end
 }

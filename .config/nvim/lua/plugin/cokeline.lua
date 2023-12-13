@@ -1,4 +1,16 @@
-local config = function()
+local spec = {
+   'willothy/nvim-cokeline',
+   event = 'VeryLazy',
+   keys = {
+      { 'H', '<Plug>(cokeline-focus-prev)' },
+      { 'L', '<Plug>(cokeline-focus-next)' },
+      { '<C-c>', '<Plug>(cokeline-pick-focus)' },
+      { '<C-u>', '<Plug>(cokeline-switch-prev)' },
+      { '<C-i>', '<Plug>(cokeline-switch-next)' },
+   },
+}
+
+spec.config = function ()
    ---------------------------------
    -- Set global options
    ---------------------------------
@@ -198,15 +210,4 @@ local config = function()
    })
 end
 
-return {
-   'willothy/nvim-cokeline',
-   lazy = false,
-   config = config,
-   keys = {
-      { 'H', '<Plug>(cokeline-focus-prev)' },
-      { 'L', '<Plug>(cokeline-focus-next)' },
-      { '<C-c>', '<Plug>(cokeline-pick-focus)' },
-      { '<C-u>', '<Plug>(cokeline-switch-prev)' },
-      { '<C-i>', '<Plug>(cokeline-switch-next)' },
-   },
-}
+return spec

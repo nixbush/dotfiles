@@ -14,7 +14,7 @@ local bufclose = function()
       return
    end
    if #buflisted < 2 then
-      vim.cmd 'confirm qall'
+      vim.cmd 'qall'
       return
    end
 end

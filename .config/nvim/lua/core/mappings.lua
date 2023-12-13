@@ -32,10 +32,10 @@ map('n', 'L', vim.cmd.bnext)
 map('n', 'H', vim.cmd.bprev)
 
 -- Tabs
-map('n', '<C-n>', vim.cmd.tabnew)
-map('n', '<C-q>', vim.cmd.tabclose)
-map('n', '<C-l>', vim.cmd.tabnext)
-map('n', '<C-h>', vim.cmd.tabprevious)
+map('n', '<C-n>', '<cmd>tabnew<cr>')
+map('n', '<C-q>', '<cmd>tabclose<cr>')
+map('n', '<C-l>', '<cmd>tabnext<cr>')
+map('n', '<C-h>', '<cmd>tabprevious<cr>')
 
 -- Move to other windows
 map('n', '<A-h>', '<C-w>h')
@@ -77,7 +77,7 @@ map('v', '<<', '<gv')
 map('n', '<ESC>', '<cmd>noh<cr><esc>')
 
 -- Exit terminal
-map('n', '<A-ESC>', '<C-\\><C-n><esc>')
+map({ 'n', 't' }, '<A-ESC>', '<C-\\><C-n><esc>')
 
 -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
 map('n', 'n', "'Nn'[v:searchforward]", { expr = true })
@@ -90,6 +90,7 @@ map('o', 'N', "'nN'[v:searchforward]", { expr = true })
 -- Quickfix list
 map('n', ']f', '<cmd>cnext<cr>')
 map('n', '[f', '<cmd>cprev<cr>')
+map('n', '<leader>qq', '<cmd>copen<cr>')
 map(
    'n',
    '<leader>qf',

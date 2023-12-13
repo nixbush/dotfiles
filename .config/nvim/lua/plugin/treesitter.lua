@@ -1,10 +1,10 @@
-local ft = { 'c', 'cpp', 'lua', 'bash' }
-
 return {
    'nvim-treesitter/nvim-treesitter',
+   build = ':TSUpdate',
+   event = 'VeryLazy',
    config = function()
       require('nvim-treesitter.configs').setup {
-         ensure_installed = ft,
+         ensure_installed = { 'c', 'cpp', 'lua', 'racket' },
          sync_install = false,
          highlight = {
             enable = true,
@@ -22,10 +22,12 @@ return {
             },
          },
       }
-      vim.wo.foldmethod = 'expr'
-      vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
-      vim.wo.foldenable = false
+      vim.api.nvim_create_autocmd({'BufEnter','BufAdd','BufNew','BufNewFile','BufWinEnter'}, {
+         group = vim.api.nvim_create_augroup('TreesitterWorkaround', {}),
+         callback = function()
+            vim.opt.foldmethod     = 'expr'
+            vim.opt.foldexpr       = 'nvim_treesitter#foldexpr()'
+         end
+      })
    end,
-   build = ':TSUpdate',
-   ft = ft,
 }

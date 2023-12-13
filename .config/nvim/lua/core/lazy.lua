@@ -24,6 +24,9 @@ require('lazy').setup('plugin', {
    ui = {
       border = 'single',
    },
+   change_detection = {
+      notify = false,
+   },
    performance = {
       rtp = {
          disabled_plugins = {
@@ -42,3 +45,9 @@ require('lazy').setup('plugin', {
       },
    },
 })
+
+---------------------------------
+-- Mappings
+---------------------------------
+local map = vim.keymap.set
+map('n', '<localleader>l', '<cmd>Lazy<cr>')

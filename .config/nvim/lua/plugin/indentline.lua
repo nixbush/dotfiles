@@ -1,6 +1,8 @@
 return {
    'lukas-reineke/indent-blankline.nvim',
    main = 'ibl',
+   event = 'VeryLazy',
+   config = true,
    opts = {
       indent = {
          highlight = 'IndentLineChar',
@@ -11,12 +13,5 @@ return {
          highlight = 'IndentLineContextChar',
          char = '▏',
       },
-      exclude = {
-         filetypes = {
-            'dashboard',
-         },
-      },
    },
-   config = true,
-   event = 'VeryLazy',
 }

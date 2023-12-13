@@ -1,13 +1,60 @@
-local M = {
+local spec = {
    'neovim/nvim-lspconfig',
-   dependencies = { 'nvimtools/none-ls.nvim' },
-   ft = { 'c', 'cpp', 'lua' },
+   ft = { 'c', 'cpp', 'lua', 'racket', 'scheme' },
 }
+
+---------------------------------
+-- LSP Configuration
+---------------------------------
+-- default configuration for every language server
+-- (just dump 'lsp' to get defaults)
+local lsp = {}
+lsp.capabilities = require('cmp_nvim_lsp').default_capabilities()
+lsp.capabilities.textDocument.foldingRange = {
+   dynamicRegistration = false,
+   lineFoldingOnly = true,
+}
+
+lsp.handlers = {
+   ['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'single' }),
+   ['textDocument/publishDiagnostics'] = vim.lsp.with(
+      vim.lsp.diagnostic.on_publish_diagnostics,
+      { severity_sort = true }
+   ),
+   ['textDocument/signatureHelp'] = vim.lsp.with(
+      vim.lsp.handlers.signature_help,
+      { border = 'single' }
+   ),
+}
+
+lsp.on_attach = function(_, bufnr)
+   -- Set mappings
+   local map = function(mode, key, cmd, opts)
+      opts.buffer = bufnr
+      vim.keymap.set(mode, key, cmd, opts)
+   end
+
+   map('n', '<leader>lD', vim.lsp.buf.declaration, { desc = 'Goto declaration' })
+   map('n', '<leader>ld', vim.lsp.buf.definition, { desc = 'Goto definition' })
+   map('n', '<leader>lh', vim.lsp.buf.hover, { desc = 'Open hover window' })
+   map('n', '<leader>li', vim.lsp.buf.implementation, { desc = 'Goto implementation' })
+   map('n', '<leader>ls', vim.lsp.buf.signature_help, { desc = 'Open signature help' })
+   map('n', '<leader>lt', vim.lsp.buf.type_definition, { desc = 'Goto type definition' })
+   map('n', '<leader>lr', vim.lsp.buf.rename, { desc = 'Rename under cursor' })
+   map('n', '<leader>la', vim.lsp.buf.code_action, { desc = 'Open code actions' })
+   map('n', '<leader>lq', vim.lsp.buf.references, { desc = 'List references' })
+   map('n', '<leader>lf', vim.lsp.buf.format, { desc = 'Format buffer' })
+   map('n', '<leader>le', vim.diagnostic.open_float, { desc = 'Open diagnostic window' })
+   map('n', '<leader>ll', vim.diagnostic.setloclist, { desc = 'Open diagnostic loclist' })
+   map('n', '<leader>lL', vim.diagnostic.setqflist, { desc = 'Open diagnostic quickfix' })
+   map('n', '[e', vim.diagnostic.goto_prev, { desc = 'Goto prev diagnostic' })
+   map('n', ']e', vim.diagnostic.goto_next, { desc = 'Goto next diagnostic' })
+end
 
 ---------------------------------
 -- LSP Setup
 ---------------------------------
-M.init = function()
+spec.init = function()
    -- Change diagnostic signs
    local signs = { Error = ' ', Warn = ' ', Hint = ' ', Info = ' ' }
    for type, icon in pairs(signs) do
@@ -41,63 +88,12 @@ M.init = function()
    }
 end
 
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
-capabilities.textDocument.foldingRange = {
-   dynamicRegistration = false,
-   lineFoldingOnly = true,
-}
-
-local handlers = {
-   ['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'single' }),
-   ['textDocument/publishDiagnostics'] = vim.lsp.with(
-      vim.lsp.diagnostic.on_publish_diagnostics,
-      { severity_sort = true }
-   ),
-   ['textDocument/signatureHelp'] = vim.lsp.with(
-      vim.lsp.handlers.signature_help,
-      { border = 'single' }
-   ),
-}
-
-local on_attach = function(_, bufnr)
-   -- Set mappings
-   local map = function(mode, key, cmd, opts)
-      local options = vim.tbl_extend('force', opts, { buffer = bufnr })
-      vim.keymap.set(mode, key, cmd, options)
-   end
-
-   local wk = require 'which-key'
-   wk.register {
-      ['<leader>l'] = 'LSP Actions',
-   }
-
-   map('n', '<leader>lD', vim.lsp.buf.declaration, { desc = 'Goto declaration' })
-   map('n', '<leader>ld', vim.lsp.buf.definition, { desc = 'Goto definition' })
-   map('n', '<leader>lh', vim.lsp.buf.hover, { desc = 'Open hover window' })
-   map('n', '<leader>li', vim.lsp.buf.implementation, { desc = 'Goto implementation' })
-   map('n', '<leader>ls', vim.lsp.buf.signature_help, { desc = 'Open signature help' })
-   map('n', '<leader>lt', vim.lsp.buf.type_definition, { desc = 'Goto type definition' })
-   map('n', '<leader>lr', vim.lsp.buf.rename, { desc = 'Rename under cursor' })
-   map('n', '<leader>la', vim.lsp.buf.code_action, { desc = 'Open code actions' })
-   map('n', '<leader>lq', vim.lsp.buf.references, { desc = 'List references' })
-   map('n', '<leader>lf', vim.lsp.buf.format, { desc = 'Format buffer' })
-   map('n', '<leader>le', vim.diagnostic.open_float, { desc = 'Open diagnostic window' })
-   map('n', '<leader>ll', vim.diagnostic.setloclist, { desc = 'Open diagnostic loclist' })
-   map('n', '<leader>lL', vim.diagnostic.setqflist, { desc = 'Open diagnostic quickfix' })
-   map('n', '[e', vim.diagnostic.goto_prev, 'Goto prev diagnostic')
-   map('n', ']e', vim.diagnostic.goto_next, 'Goto next diagnostic')
-end
-
----------------------------------
--- LSP Config
----------------------------------
-M.config = function()
+spec.config = function()
    local lspconfig = require 'lspconfig'
-
    lspconfig.lua_ls.setup {
-      capabilities = capabilities,
-      on_attach = on_attach,
-      handlers = handlers,
+      handlers = lsp.handlers,
+      on_attach = lsp.on_attach,
+      capabilities = lsp.capabilities,
       settings = {
          Lua = {
             runtime = {
@@ -107,7 +103,7 @@ M.config = function()
                globals = { 'vim' },
             },
             workspace = {
-               library = vim.env.VIMRUNTIME,
+               library = vim.env.VIspecRUNTIME,
             },
             telemetry = {
                enable = false,
@@ -117,12 +113,12 @@ M.config = function()
    }
 
    lspconfig.clangd.setup {
-      capabilities = capabilities,
+      handlers = lsp.handlers,
       on_attach = function(client, bufnr)
-         on_attach(client, bufnr)
+         lsp.on_attach(client, bufnr)
          vim.keymap.set('n', 'gs', '<cmd>ClangdSwitchSourceHeader<cr>', { buffer = bufnr })
       end,
-      handlers = handlers,
+      capabilities = lsp.capabilities,
       cmd = {
          '/usr/bin/clangd',
          '--background-index',
@@ -135,10 +131,13 @@ M.config = function()
    }
 
    lspconfig.racket_langserver.setup {
-      capabilities = capabilities,
-      on_attach = on_attach,
-      handlers = handlers,
+      handlers = lsp.handlers,
+      on_attach = lsp.on_attach,
+      capabilities = lsp.capabilities,
+      root_dir = function ()
+         return vim.fn.getcwd()
+      end
    }
 end
 
-return M
+return spec
