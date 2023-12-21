@@ -23,7 +23,7 @@ if status is-login
    # -------------------------
    # Run Hyprland
    if test -z $DISPLAY; and test (tty) = "/dev/tty1"
-      Hyprland &> /dev/null
+      Hyprland &> $XDG_CACHE_HOME/hyprland/hyprland.log
    end
 end
 

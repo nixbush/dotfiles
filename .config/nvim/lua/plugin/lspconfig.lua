@@ -16,7 +16,10 @@ lsp.capabilities.textDocument.foldingRange = {
 }
 
 lsp.handlers = {
-   ['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'single' }),
+   ['textDocument/hover'] = vim.lsp.with(
+      vim.lsp.handlers.hover,
+      { border = 'single' }
+   ),
    ['textDocument/publishDiagnostics'] = vim.lsp.with(
       vim.lsp.diagnostic.on_publish_diagnostics,
       { severity_sort = true }
@@ -34,19 +37,63 @@ lsp.on_attach = function(_, bufnr)
       vim.keymap.set(mode, key, cmd, opts)
    end
 
-   map('n', '<leader>lD', vim.lsp.buf.declaration, { desc = 'Goto declaration' })
+   map(
+      'n',
+      '<leader>lD',
+      vim.lsp.buf.declaration,
+      { desc = 'Goto declaration' }
+   )
    map('n', '<leader>ld', vim.lsp.buf.definition, { desc = 'Goto definition' })
    map('n', '<leader>lh', vim.lsp.buf.hover, { desc = 'Open hover window' })
-   map('n', '<leader>li', vim.lsp.buf.implementation, { desc = 'Goto implementation' })
-   map('n', '<leader>ls', vim.lsp.buf.signature_help, { desc = 'Open signature help' })
-   map('n', '<leader>lt', vim.lsp.buf.type_definition, { desc = 'Goto type definition' })
+   map(
+      'n',
+      '<leader>li',
+      vim.lsp.buf.implementation,
+      { desc = 'Goto implementation' }
+   )
+   map(
+      'n',
+      '<leader>ls',
+      vim.lsp.buf.signature_help,
+      { desc = 'Open signature help' }
+   )
+   map(
+      'n',
+      '<leader>lt',
+      vim.lsp.buf.type_definition,
+      { desc = 'Goto type definition' }
+   )
    map('n', '<leader>lr', vim.lsp.buf.rename, { desc = 'Rename under cursor' })
-   map('n', '<leader>la', vim.lsp.buf.code_action, { desc = 'Open code actions' })
+   map(
+      'n',
+      '<leader>la',
+      vim.lsp.buf.code_action,
+      { desc = 'Open code actions' }
+   )
    map('n', '<leader>lq', vim.lsp.buf.references, { desc = 'List references' })
-   map('n', '<leader>lf', vim.lsp.buf.format, { desc = 'Format buffer' })
-   map('n', '<leader>le', vim.diagnostic.open_float, { desc = 'Open diagnostic window' })
-   map('n', '<leader>ll', vim.diagnostic.setloclist, { desc = 'Open diagnostic loclist' })
-   map('n', '<leader>lL', vim.diagnostic.setqflist, { desc = 'Open diagnostic quickfix' })
+   map('n', '<leader>lf', function ()
+      vim.lsp.buf.format {
+         timeout_ms = 10000,
+      }
+   end, { desc = 'Format buffer' })
+   map(
+      'n',
+      '<leader>le',
+      vim.diagnostic.open_float,
+      { desc = 'Open diagnostic window' }
+   )
+   map(
+      'n',
+      '<leader>ll',
+      vim.diagnostic.setloclist,
+      { desc = 'Open diagnostic loclist' }
+   )
+   map(
+      'n',
+      '<leader>lL',
+      vim.diagnostic.setqflist,
+      { desc = 'Open diagnostic quickfix' }
+   )
    map('n', '[e', vim.diagnostic.goto_prev, { desc = 'Goto prev diagnostic' })
    map('n', ']e', vim.diagnostic.goto_next, { desc = 'Goto next diagnostic' })
 end
@@ -116,7 +163,12 @@ spec.config = function()
       handlers = lsp.handlers,
       on_attach = function(client, bufnr)
          lsp.on_attach(client, bufnr)
-         vim.keymap.set('n', 'gs', '<cmd>ClangdSwitchSourceHeader<cr>', { buffer = bufnr })
+         vim.keymap.set(
+            'n',
+            'gs',
+            '<cmd>ClangdSwitchSourceHeader<cr>',
+            { buffer = bufnr }
+         )
       end,
       capabilities = lsp.capabilities,
       cmd = {
@@ -134,9 +186,9 @@ spec.config = function()
       handlers = lsp.handlers,
       on_attach = lsp.on_attach,
       capabilities = lsp.capabilities,
-      root_dir = function ()
+      root_dir = function()
          return vim.fn.getcwd()
-      end
+      end,
    }
 end
 
