@@ -71,7 +71,7 @@ lsp.on_attach = function(_, bufnr)
       { desc = 'Open code actions' }
    )
    map('n', '<leader>lq', vim.lsp.buf.references, { desc = 'List references' })
-   map('n', '<leader>lf', function ()
+   map({'n', 'v'}, '<leader>lf', function ()
       vim.lsp.buf.format {
          timeout_ms = 10000,
       }

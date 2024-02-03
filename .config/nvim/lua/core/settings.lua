@@ -20,7 +20,7 @@ g.loaded_netrwPlugin = 1
 -- Aesthetics
 ---------------------------------
 o.cmdheight = 1
-o.colorcolumn = '80'
+o.colorcolumn = '100'
 o.cursorline = true
 o.fillchars = {
    eob = ' ',

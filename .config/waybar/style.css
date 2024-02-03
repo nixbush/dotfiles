@@ -84,13 +84,13 @@ tooltip {
    padding-left: 12px;
    border-radius: 0px 0px 0px 8px;
 }
-#wireplumber {
+#pulseaudio {
    font-family: Monaspace Krypton;
    font-size: 14px;
    background: @base;
    padding-right: 6px;
 }
-#wireplumber.muted {
+#pulseaudio.muted {
    font-family: Monaspace Krypton;
    font-size: 14px;
    background: @base;

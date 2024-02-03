@@ -10,7 +10,7 @@
    //------------------------------
    "modules-left":   [ "hyprland/window" ],
    "modules-center": [ "hyprland/workspaces" ],
-   "modules-right":  [ "backlight", "wireplumber", "clock", "tray" ],
+   "modules-right":  [ "backlight", "pulseaudio", "clock", "tray" ],
 
    "hyprland/window": {
       "format": "{title}",
@@ -38,17 +38,27 @@
          "<span color='#a6da95'>󰃠</span>"
       ],
       "on-scroll-up": "light -A 5",
-      "on-scroll-down": "light -U 5"
+      "on-scroll-down": "light -U 5",
+      "tooltip": "Light up the World!"
    },
-   "wireplumber": {
+   "pulseaudio": {
       "on-click": "pavucontrol",
       "format": "{volume:>3}% {icon} ",
       "format-muted": "<s>Muted 󰝟 </s>",
-      "format-icons": [
-         "<span color='#ed8796'>󰕿</span>",
-         "<span color='#eed49f'>󰖀</span>",
-         "<span color='#a6da95'>󰕾</span>"
-      ]
+      "format-bluetooth": "{volume:>3}% <span color='#8aadf4'>󰂯</span> {icon} ",
+      "format-icons": {
+         "headphones": "<span color='#eed49f'>󰋎</span>",
+         "hands-free": "<span color='#f0c6c6'>󰷼</span>",
+         "headset": "<span color='#eed49f'>󰋋</span>",
+         "phone": "<span color='#f5a97f'>󰏲</span>",
+         "portable": "<span color='#f5a97f'>󰏲</span>",
+         "car": "",
+         "default": [
+            "<span color='#ed8796'>󰕿</span>",
+            "<span color='#eed49f'>󰖀</span>",
+            "<span color='#a6da95'>󰕾</span>"
+         ]
+      }
    },
    "clock": {
       "format": "{:%I:%M %p} <span color='#eed49f'>󰥔</span> ",
