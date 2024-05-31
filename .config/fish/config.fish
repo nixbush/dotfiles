@@ -6,7 +6,6 @@ if status is-login
    fish_add_path     ~/.local/bin
    set -gx LESS      \x2dFiJMRWXx3\x20\x2dz4
    set -gx EDITOR    nvim
-   set -gx TERMINAL  footclient
 
    # XDG Variables
    set -gx XDG_CACHE_HOME  ~/.cache
